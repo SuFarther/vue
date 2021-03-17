@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios 配置和并发</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    axios.all([
+        axios({
+            url: 'https://cdn.liyanhui.com/data.json',
+            data: '1.异步'
+        }),
+        axios({
+            url: 'https://cdn.liyanhui.com/data.json',
+            data: '2.异步'
+        }), axios({
+            url: 'https://cdn.liyanhui.com/data.json',
+            data: '3.异步'
+        }),
+    ]).then(value => {
+        for (let i = 0; i < value.length; i++) {
+            console.log(value[i].config.data);
+        }
+    })
+</script>
+<body>
+<!--axios.js 是一个基于 promise 的 HTTP 库，支持浏览器和 Node 环境;-->
+<!--说明白点，就是使用这个库来执行Ajax请求，获取JSON数据;-->
+<!--我们可以利用axios可以发送get、post等一系列请求，然后得到数据;-->
+</body>
+</html>

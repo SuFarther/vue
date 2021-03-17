@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的单向数据流</title>
+</head>
+<body>
+<!--父组件的data值更新后通过props选项交给子组件进行渲染，反之则不行;-->
+<!--这就是单向数据流(单向下行绑定)，不能通过子组件来改变父组件的状态;-->
+<!--这样做的是为了防止父组件发生改变后，数据流变得难以理解;-->
+<!--父组件更新时，子组件所有props值也会更新，你不能改变子组件的props值;-->
+<div id="app">
+  <html-a v-bind:count="count"></html-a>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    const app =  new Vue({
+        el : '#app',
+        data : {
+            count : 0
+        },
+        //通过使用data数据更改
+    //     components : {
+    //         'html-a' : {
+    //           data() {
+    //               return  {
+    //                   message: '子组件',
+    //                   childCount : this.count
+    //               }
+    //           },
+    //           template : `
+    //              <button v-on:click="childCount++">{{childCount}}</button>
+    //           `,
+    //           props : ['count'],
+    //         }
+    //     }
+    // })
+    // 以上内容，会正确改变了props的值，也渲染到视图中，但控制台报错;
+    // 意为:不可以直接修改props值，可以通过数据或计算属性来解决
+
+    //通过使用计算属性和方法数据更改
+        components : {
+            'html-a' : {
+                data() {
+                    return  {
+                        message: '子组件',
+                        childCount : this.count
+                    }
+                },
+                template : `
+                 <button v-on:click="chickChildCount">{{changeChildCount}}</button>
+                `,
+                props : ['count'],
+                computed : {
+                    changeChildCount(){
+                       return this.childCount
+                    },
+                },
+                methods : {
+                    chickChildCount(){
+                        this.childCount++
+                    }
+                }
+
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

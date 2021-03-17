@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组检测和 key</title>
+</head>
+<body>
+<div id="app">
+     <!--    首先，在v-for中不添加key时，会发生什么问题?-->
+    <button v-on:click="add">添加</button>
+    <ul>
+        <li v-for="item in array">
+            <input type="checkbox" />
+            {{item.city}}
+        </li>
+<!--        <li v-for="item in array" v-bind:key="item.id"><input type="checkbox" />{{item.city}}</li>-->
+    </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    const dataObj = {
+        array : [
+            {
+                id: 1,
+                city: '北京'
+            },
+            {
+                id: 2,
+                city: '上海'
+            },
+            {
+                id: 3,
+                city: '深圳'
+            }
+        ]
+    }
+
+    const   app = new Vue({
+        el : '#app',
+        data : dataObj,
+        methods : {
+            add(){
+              this.array.unshift({id:4,city: '重庆'})
+            }
+        }
+    })
+</script>
+</body>
+</html>

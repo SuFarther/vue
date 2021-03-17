@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class 与 style 绑定</title>
+<!--    <style>-->
+<!--        .active{-->
+<!--            font-weight: bold;-->
+<!--            color: red;-->
+<!--        }-->
+<!--        .bold{-->
+<!--            font-weight: bold;-->
+<!--            color: blue;-->
+<!--        }-->
+<!--    </style>-->
+</head>
+<body>
+<div id="app">
+  <!--  v-bind:class不但可以设置class属性，还可以和元素本身的class共存;  -->
+    <!--  <div class="static" v-bind:class="{active : isActive,bold : isBold}">-->
+    <!--      {{isActive}} | {{isBold}}-->
+    <!--  </div>-->
+
+    <!--    上面的方案给模版插值带来一定的压力，我们可以直接定义在视图模型端;-->
+    <!--    <div class="static" v-bind:class="isClass" >-->
+    <!--        {{isClass}}-->
+    <!--    </div>-->
+
+   <!--    还有一种数组的方案，模版插值使用数组格式来定义;-->
+    <!--    <div class="static" v-bind:class="[active,bold]">-->
+    <!--        {{active}} | {{bold}}-->
+    <!--    </div>-->
+
+    <!--    当然，如果有复杂的业务计算，那么直接交给计算属性处理即可;-->
+<!--    <div class="static" v-bind:class="classObject">-->
+<!--      {{message}}-->
+<!--    </div>-->
+
+<!--    style绑定和class基本上是一样的，可以和已有的样式共存，相同的覆盖;-->
+<!--      方案一-->
+<!--    <div style="font-size: 20px;color:red;" v-bind:style="{color : activeColor}">-->
+<!--        {{message}}-->
+<!--    </div>-->
+
+<!--    方案二-->
+<!--   <div style="font-size: 18px;color: red;" v-bind:style="styleObject">-->
+<!--       {{message}}-->
+<!--   </div>-->
+
+<!--     方案三-->
+<!--    <div style="font-size: 18px;color: red;" v-bind:style="[styleObject]">-->
+<!--        {{message}}-->
+<!--    </div>-->
+
+<!--     方案四-->
+    <div style="font-size: 18px;color: red;" v-bind:style="styleObject">
+        {{message}}
+    </div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    const dataObj = {
+        //class模式
+        // isActive : true,
+        // isBold : false
+        // isClass : {
+        //     active : true,
+        //     bold : false
+        // }
+        // active : 'active',
+        // bold : 'bold'
+
+        //style模式
+        // message : 'Hello,Vue!',
+        // activeColor: 'blue'
+        // message : 'Hello,Vue!',
+        // styleObject : {
+        //     color : 'blue'
+        // }
+        message : 'Hello,Vue!',
+        // styleObject : {
+        //     color : 'blue',
+        //     fontSize : '20px'
+        // }
+    }
+
+    const app = new Vue({
+        el : '#app',
+        data : dataObj,
+        // data : dataObj,
+        // computed : {
+        //     classObject() {
+        //        return  {
+        //            active : true,
+        //            bold : false
+        //        }
+        //     }
+        // }
+
+        //style计算属性
+        //计算属性,固定属性
+        computed : {
+            styleObject() {
+                return {
+                    color : 'blue',
+                    fontSize : '40px'
+                }
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>

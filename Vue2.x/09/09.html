@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理能力</title>
+</head>
+<body>
+<div id="app">
+<!--   <button v-on:click="counter +=1">增加</button>-->
+<!--   <div>counter : {{counter}}</div>-->
+
+<!--    我们可以通过点击执行方法，并且处理事件对象;-->
+<!--    <button v-on:click="greet">执行事件</button>-->
+
+<!--    我们也可以实现执行方法中传递参数，如果要传递event，请$event;-->
+<!--    <button v-on:click="say('world!',$event)">传递参数</button>-->
+
+
+<!--    事件对象有很多作用，比如阻止冒泡;-->
+<!--    <div v-on:click="say('div',$event)">-->
+<!--        <button v-on:click="say('world!')">传递参数</button>-->
+<!--    </div>-->
+
+<!--    系统提供了常用的事件对象修饰符，让你直接定义视图中事件的执行方式;-->
+<!--    <button v-on:click.stop="say('world!')">传递参数</button>-->
+
+<!--    再选择两个常用的比如:只运行执行一次once，取消默认事件prevent;-->
+    <button v-on:click.once="greet">执行事件</button>
+
+    <form action="http://www.baidu.com">
+<!--        <button type="submit" v-on:click.prevent="">提交</button>-->
+        <input v-on:keyup.enter="submit">
+    </form>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    const dataObj = {
+        message : 'Hello,Vue',
+        counter : 0,
+    }
+
+    const   app = new Vue({
+        el : '#app',
+        data : dataObj,
+        // PS:(1).event 参数可以不用显式的接受，也可以获取到。
+        // (2).如果执行没有参数，而接受任意参数，也会当作 event 对象;
+        methods : {
+            greet(event) {
+                alert(this.message + event.target.innerText)
+            },
+            say(info,event){
+                alert('Hello,'+info);
+            }
+        }
+    })
+</script>
+</body>
+</html>

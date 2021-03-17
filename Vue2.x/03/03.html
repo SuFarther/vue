@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法和指令</title>
+</head>
+<style>
+    .red{
+        color: red;
+    }
+    .green{
+        color: green;
+    }
+</style>
+<body>
+<!--我们可以通过在html设置一个指令:v-once，强制插值只能渲染一次，不可更新;-->
+<div id="app">
+    {{message}}
+    <div v-html="html"></div>
+    <!--通过更改color值实现替换颜色的效果-->
+   <!--  <div v-bind:class="color">bind</div>-->
+    <!--v-bind缩写-->
+    <!-- <div :class="color">bind</div>-->
+    <div :[key]="color">bind</div>
+
+
+    <!-- 在模板语法中，支持JavaScript表达式，比如:运算、函数等;-->
+    <!--注意:语句不支持，比如赋值语句，条件判断等-->
+    <div>{{num + 1}}{{true ? '真' : '假'}}{{message.split('')}}</div>
+
+
+    <div v-if="flag">为true方可显示</div>
+
+    <!--v-on 缩写-->
+    <button @click="alert">点击</button>
+    <button>点击</button>
+
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    //数据对象
+    const dataObj = {
+         message : 'Hello,Vue!',
+        // 模板的插值解释为普通文本，如果想输出html格式，则可以使用v-html指令;
+        //绝不要对用户的内容提供 v-html 插值
+        //因为它容易造成 XSS 攻击
+        html : '<span style="color:red;">Vue2</span>',
+        //模版插值不能作用域HTML元素的属性上，我们可以使用v-bind指令实现;
+        color : 'red',
+        flag : true,
+        num : 3,
+        key : 'class'
+    }
+
+    //创建一个Vue实例
+    //当我们创建Vue实例时，框架会执行一系列操作，比如监听、编译、挂载等;
+    const  app = new Vue({
+        el : '#app',
+        data : dataObj,
+        //方法的执行，需要通过methods属性来定义方法，并使用指令执行;
+        methods : {
+            alert : function (){
+                alert('点击');
+            }
+        }
+    });
+</script>
+</body>
+</html>

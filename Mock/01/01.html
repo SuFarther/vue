@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mock.js 入门和安装</title>
+    <script src="http://mockjs.com/dist/mock.js"></script>
+   <script>
+       const data = Mock.mock({
+           'list|1-10': [{
+               // 属性 id 是一个自增数，起始值为 1，每次增 1
+               'id|+1': 1
+           }]
+       });
+       // 输出结果
+       console.log(data)
+       // 转换 JSON 格式
+       console.log(JSON.stringify(data, null, 4));
+   </script>
+</head>
+<body>
+
+</body>
+</html>

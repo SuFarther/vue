@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性和 setter</title>
+</head>
+<body>
+<!--我们可以通过在html设置一个指令:v-once，强制插值只能渲染一次，不可更新;-->
+<div id="app">
+    <!--三个插值拼装-->
+    <!-- {{start}} {{message}} {{end}}-->
+    <!--插值调用方法-->
+    <!-- {{welcome()}}-->
+    <!--计算属性调用方法-->
+   <!--  {{welcome}}-->
+    {{welcome}}
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    //数据对象
+    const dataObj = {
+         start : '[',
+         message : 'Hello,Vue!',
+         end : ']'
+    }
+
+    //创建一个Vue实例
+    //当我们创建Vue实例时，框架会执行一系列操作，比如监听、编译、挂载等;
+    const  app = new Vue({
+        el : '#app',
+        data : dataObj,
+        //方法
+        // methods : {
+        //     welcome() {
+        //         console.log('执行了方法' + Math.random());
+        //         return this.start + this.message + this.end;
+        //     }
+        // }
+        //系统提供了第三种方法解决了这两个问题，就是计算属性;
+        //计算属性
+        // computed : {
+        //     welcome() {
+        //         console.log('执行了计算属性' + Math.random());
+        //         return this.start + this.message + this.end;
+        //     }
+        // }
+
+        //一般方法有getter(取值)和setter(赋值)两种，计算属性默认只有getter;
+        //不过，如果你要强行设置，自然也可以让其拥有setter功能;
+        //计算属性
+        computed: {
+           welcome : {
+               get (){
+                   console.log('执行了计算属性'+Math.random());
+                   return this.start  + this.message + this.end;
+               },
+               set (value){
+                   this.start = value.split(',')[0],
+                   this.end = value.split(',')[1];
+                   console.log('执行了setter')
+               }
+           }
+        }
+    });
+</script>
+</body>
+</html>

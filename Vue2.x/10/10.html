@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单输入绑定</title>
+</head>
+<body>
+<div id="app">
+<!--    文本框(包含多行)，使用v-model指令可以及时渲染更新内容;-->
+    <input type="text" placeholder="请输入内容" v-model="message">
+    <div>内容: {{message}}</div>
+
+    <input type="checkbox" id="checkbox" v-model="checkbox">
+    <label for="checkbox">{{checkbox}}</label><br/>
+
+    <input type="checkbox" id="a" value="Mr.Lee" v-model="checkNames">
+    <label for="a">Mr.Lee</label>
+
+    <input type="checkbox" id="b" value="Mr.Zhang" v-model="checkNames">
+    <label for="b">Mr.Zhang</label>
+
+    <input type="checkbox" id="c" value="Mr.Li" v-model="checkNames">
+    <label for="c">Mr.Li</label>
+
+    人员:{{checkNames}}<br/>
+
+    <input type="radio" id="one" value="男" v-model="gender">
+    <label for="one">男</label>
+
+    <input type="radio" id="two" value="女" v-model="gender">
+    <label for="two">女</label>
+
+    <input type="radio" id="three" value="未知" v-model="gender">
+    <label for="three">未知</label>
+
+    性别:{{gender}}<br/>
+
+    <select v-model="selected">
+        <option>北京</option>
+        <option>上海</option>
+        <option>深圳</option>
+    </select>
+
+    已选:{{selected}}<br/>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    const dataObj = {
+        message : 'Hello,Vue',
+        checkbox : false,
+        checkNames : [],
+        gender : '男',
+        selected : ''
+    }
+
+    const   app = new Vue({
+        el : '#app',
+        data : dataObj
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+/**font.css*/
+h1{
+    color: blue;
+    font-size: 200px;
+}
+
+#loading{
+    width: 780px;
+    height: 422px;
+    background-image: url("./loading.gif");
+}
+
+#ts{
+    width: 609px;
+    height: 699px;
+    background-image: url("./ts.png");
+}

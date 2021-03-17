@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的嵌套</title>
+</head>
+<body>
+<!--组件是一种封装可复用的集合，通过组件化，将更好的完成繁杂的需求;-->
+<!--组件化特点，具体如下:-->
+<!--(1) .拥有唯一性的组件名称，方便调用;-->
+<!--(2) .以组件名称为 HTML 元素标签形式存在，扩展了 HTML; -->
+<!--(3) .组件可以复用，且组件与组件之间互不干涉;-->
+
+
+<div id="app">
+<!--视图输出 -->
+    <html-a></html-a>
+    <html-b></html-b>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+
+    //1号父组件
+    Vue.component('html-a',{
+       data(){
+           return {
+               message: 'Hello,1号父组件'
+           }
+       },
+       template : `<div>{{message}}</div>`
+    });
+
+    //2号父组件
+    Vue.component('html-b',{
+        data(){
+            return {
+                message : 'Hello,2号父组件'
+            }
+        },
+        template : `<div>{{message}}</div>`
+    })
+
+    const dataObj = {
+        message :'Hello,Vue!'
+    }
+
+    const   app = new Vue({
+        el : '#app',
+        data : dataObj,
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定义选项对象</title>
+</head>
+<body>
+<div id="app">
+    <!--渲染 id="app"中的模版-->
+    {{message}}
+
+    <!--渲染id = 'app'中的模版-->
+    <button v-on:click="alert">点击</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  //数据对象
+  const dataObj = {
+      message : 'Hello,Vue!'
+  }
+
+
+  //数据冻结
+  // Object.freeze(dataObj);
+
+  //创建一个Vue实例
+  //当我们创建Vue实例时，框架会执行一系列操作，比如监听、编译、挂载等;
+  const  app = new Vue({
+     //el 固定属性，挂载指定元素
+     el : '#app',
+     //数据定义,使用data属性实现,它的值是也是一个以对象形式的存在
+     //data固定属性,定义数据
+     //数据中的属性名和模版变量名一致
+     data : dataObj,
+     //方法的执行，需要通过methods属性来定义方法，并使用指令执行;
+     methods : {
+         alert : function (){
+             alert('点击');
+         }
+     },
+     //created固定方法,生命周期钩子
+     //这个方法在初始化后执行
+      created : function (){
+         console.log('初始化后: ' + this.message);
+      },
+
+      //当修改并更新渲染后执行的钩子
+      updated : function (){
+         console.log('修改后: ' + this.message);
+      }
+  });
+</script>
+</body>
+</html>

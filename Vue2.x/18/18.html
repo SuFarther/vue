@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的自定义事件</title>
+</head>
+<body>
+
+<div id="app">
+    {{message}}
+    <!--这里 child-event 是子组件的自定义事件-->
+    <!--而 parentFn 是父组件的方法，通过这个修改父组件内容-->
+    <!--这里是不需要传参的，参数会自动传入，直接接收 即可-->
+    <html-a v-on:child-event="parentFn"></html-a>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警告
+    Vue.config.productionTip = false;
+
+    //创建一个Vue对象
+    //父组件
+    const app = new Vue({
+        el : '#app',
+        data : {
+            message : 'Hello, Vue!'
+        },
+        components : {
+            'html-a' : {
+                data() {
+                    return {
+                        name : 'Mr.Lee'
+                    }
+                },
+                //下面代码为子组件 html-a 的自定义事件
+                template : `
+                      <div>
+                            <button v-on:click="childClick(name)">{{name}}</button>
+                      </div>
+                `,
+                methods : {
+                    //通过子组件的 click 事件来执行这个方法
+                    //其中 this.$emit 是内置 API，可参考手册
+                    //$emit 表示触发当前实例事件，可附带参数
+                    //参数一是自定义事件，不支持类似 props 驼峰写法
+                    childClick(name) {
+                        this.$emit('child-event', name)
+                    }
+                }
+            }
+        },
+
+        //计算属性，固定名称
+        computed : {
+
+        },
+
+        //方法
+        methods : {
+            parentFn(name) {
+                this.message = name;
+                console.log('子组件传递给父组件！' + name);
+            }
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

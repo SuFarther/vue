@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的模板定义</title>
+</head>
+<body>
+<!--只要在子组件的html元素中使用inline-template即可实现内部模板定义;-->
+<div id="app">
+    <html-a v-bind:text="message" ></html-a>
+</div>
+<!--也可以将模板封装在script脚本区域，类型设置为:text/x-template;-->
+<script type="text/x-template" id="html-a">
+    <div>{{text}}</div>
+</script>
+
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警告
+    Vue.config.productionTip = false;
+
+
+    const dataObj = {
+        message :'Hello World!'
+    }
+
+
+    const app = new Vue({
+        el : '#app',
+        data : dataObj,
+        components : {
+            'html-a' : {
+                data() {
+                    return {
+                        name : 'Mr.Lee'
+                    }
+                },
+                template : '#html-a',
+                props : ['text']
+            }
+        },
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件判断渲染</title>
+</head>
+<body>
+<div id="app">
+    <!--    使用v-if指令可以判断是否渲染指定的区域，不渲染会变成一行注释;-->
+<!--    <div v-if="flag">-->
+<!--        {{message}}-->
+<!--    </div>-->
+
+   <!--    条件判断支持v-else指令，渲染v-if的另一区域;-->
+<!--    <div v-if="flag">-->
+<!--        {{message}}-->
+<!--    </div>-->
+<!--    <div v-else>-->
+<!--        else-->
+<!--    </div>-->
+
+   <!--    2.1.0版本新增了v-else-if，强化了条件判断;-->
+    <div v-if="flag">
+        {{message}}
+    </div>
+    <div v-else-if="flag === false">
+        else-if
+    </div>
+    <div v-else>
+        else
+    </div>
+    <template v-if="flag">
+        <label for="reg">注册:</label>
+        <input type="text" id="reg">
+    </template>
+
+    <template v-else>
+        <label for="login">登录:</label>
+        <input type="text" id="login">
+    </template>
+
+    <div v-show="flag">show</div>
+
+    <input type="button"   value="切换" v-on:click="toggleIf">
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+    const dataObj = {
+        message : 'Hello,Vue!',
+        flag: false
+    }
+
+    const app = new Vue({
+        el: '#app',
+        data: dataObj,
+        methods : {
+            toggleIf(){
+                this.flag = !this.flag
+            }
+        }
+    })
+</script>
+</body>
+</html>

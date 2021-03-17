@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mock 拦截 axios 请求</title>
+    <script src="http://mockjs.com/dist/mock.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //这个也是最终的需求功能，我们假设axios异步请求的数据尚未上线或不全;
+        //然后再通过mock请求拦截，随机生成填充的数据进行前端设计;
+        axios.request({
+            method : 'get',
+            url : 'https://cdn.liyanhui.com/data.json',
+        }).then(res => {
+            console.log(res.data);
+        })
+
+
+        //mock拦截,并随机生成填充数据
+        Mock.mock('https://cdn.liyanhui.com/data.json',{
+            'list|5-10': [{ 'id|+1': 1,
+                'username' : '@cname',
+                'email' : '@email',
+                'price' : '@integer',
+                'gender' : '@boolean'
+            }]
+        })
+    </script>
+</head>
+<body>
+</body>
+</html>

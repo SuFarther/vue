@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>局部组件的注册</title>
+</head>
+<body>
+<!--组件是一种封装可复用的集合，通过组件化，将更好的完成繁杂的需求;-->
+<!--组件化特点，具体如下:-->
+<!--(1) .拥有唯一性的组件名称，方便调用;-->
+<!--(2) .以组件名称为 HTML 元素标签形式存在，扩展了 HTML; -->
+<!--(3) .组件可以复用，且组件与组件之间互不干涉;-->
+
+
+<div id="app">
+<!--视图输出 -->
+    <button-a></button-a>
+    <button-a></button-a>
+</div>
+
+<div id="app2">
+<!--    <button-a></button-a>-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //去掉警高
+    Vue.config.productionTip = false;
+
+
+    const dataObj = {
+        message :'Hello,Vue!'
+    }
+
+    const   app = new Vue({
+        el : '#app',
+        data : dataObj,
+        //绑定组件注册
+        components : {
+            'button-a' : {
+                data(){
+                    return {
+                        count:0
+                    }
+                },
+                template: `
+                    <button v-on:click="count++">
+                       点击量: {{count}}
+                    </button>
+                `
+            }
+        }
+    })
+
+    const  app2 = new Vue({
+        el : '#app2'
+    })
+
+</script>
+</body>
+</html>
